@@ -1,0 +1,6 @@
+@PayFlowX_HostAddress = http://localhost:5021
+
+GET {{PayFlowX_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
