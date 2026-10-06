@@ -1,13 +1,52 @@
-﻿namespace PayFlowX.Tests
+﻿using Microsoft.AspNetCore.Mvc;
+using Moq;
+using PayFlowX.Controllers;
+using PayFlowX.Models;
+using PayFlowX.Services;
+
+namespace PayFlowX.Tests
 {
-    public class BasicTests
+    public class TransactionsControllerTests
     {
         [Fact]
-        public void SimpleTest_ShouldPass()
+        public async Task GetAll_ShouldReturnOk_WithTransactions()
         {
-            Assert.True(true);
-     Console.WriteLine("Test passed successfully.");
+            var fakeTransactions = new List<Transaction>
+            {
+                new Transaction
+                {
+                    Amount = 100,
+                    Currency = "GBP",
+                    Status = "Active"
+                },
+                new Transaction
+                {
+                    Amount = 200,
+                    Currency = "USD",
+                    Status = "Active"
+                }
+            };
 
+            var mockService = new Mock<ITransactionService>();
+
+            mockService
+                .Setup(x => x.GetAllAsync())
+                .ReturnsAsync(fakeTransactions);
+
+            var controller =
+                new TransactionsController(mockService.Object);
+
+            var result = await controller.GetAll();
+
+            var okResult =
+                Assert.IsType<OkObjectResult>(result);
+
+            var transactions =
+                Assert.IsAssignableFrom<IEnumerable<Transaction>>(
+                    okResult.Value
+                );
+
+            Assert.Equal(2, transactions.Count());
         }
     }
 }
