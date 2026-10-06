@@ -67,6 +67,8 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
+app.MapGet("/health", () => "PayFlowX API is running");
+
 app.MapControllers();
 
 app.Run();
