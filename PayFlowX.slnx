@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="PayFlowX.Tests/PayFlowX.Tests.csproj" Id="db5a7d6b-c16f-4581-9d5b-f5a30e4fb807" />
   <Project Path="PayFlowX/PayFlowX.csproj" />
 </Solution>

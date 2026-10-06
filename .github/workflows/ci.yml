@@ -27,3 +27,6 @@ jobs:
 
       - name: Build backend
         run: dotnet build PayFlowX/PayFlowX.csproj --no-restore --configuration Release
+
+      - name: Run tests
+        run: dotnet test PayFlowX.Tests/PayFlowX.Tests.csproj --configuration Release
